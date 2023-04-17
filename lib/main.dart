@@ -48,16 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
   FactoriaMuebles factoriaGeneral = FactoriaTiendaMesaCocina();
 
   void _incrementCounterOficina() {
-    setState(() {
       _counterOficina++;
-      _stockOficina --;
-    });
+      setState(() {
+        _stockOficina --;
+      });
   }
 
   void _incrementCounterCocina() {
     setState(() {
       _counterCocina++;
-      _stockCocina --;
+      setState(() {
+        _stockCocina--;
+      });
     });
   }
 
@@ -73,14 +75,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _createOficina() {
     Mesa mesa = factoriaGeneral.crearMesa(_idMuebleOficina);
-    _idMuebleOficina += 1;
-    _stockOficina += 1;
+    _idMuebleOficina ++;
+    setState(() {
+      _stockOficina ++;
+    });
   }
 
   void _createCocina() {
     Mesa mesa = factoriaGeneral.crearMesa(_idMuebleCocina);
-    _idMuebleCocina += 1;
-    _stockCocina += 1;
+    _idMuebleCocina ++;
+    setState(() {
+      _stockCocina ++;
+    });
   }
 
   void _reset() {
@@ -153,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            Text('Dispones de ${_saldo.toString()} €'),
+            Text('\nDispones de ${_saldo.toString()} €'),
             ElevatedButton(
               onPressed: () {
                 _reset();
