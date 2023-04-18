@@ -41,17 +41,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counterOficina = 0, _counterCocina = 0;
-  int _stockOficina = 0, _stockCocina = 0, _idMuebleCocina = 0, _idMuebleOficina = 0;
-  double _costeOficina = 199, _costeCocina = 150, _saldo = 1000;
+  int _counterOficina = 0,
+      _counterCocina = 0;
+  int _stockOficina = 0,
+      _stockCocina = 0,
+      _idMuebleCocina = 0,
+      _idMuebleOficina = 0;
+  double _costeOficina = 199,
+      _costeCocina = 150,
+      _saldo = 1000;
 
   FactoriaMuebles factoriaGeneral = FactoriaTiendaMesaCocina();
 
   void _incrementCounterOficina() {
-      _counterOficina++;
-      setState(() {
-        _stockOficina --;
-      });
+    _counterOficina++;
+    setState(() {
+      _stockOficina --;
+    });
   }
 
   void _incrementCounterCocina() {
@@ -107,72 +113,75 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Image.asset('assets/mesa-cocina-libro-nube-1_cerrada.jpg', width: 500, height: 400),
-                    const SizedBox(height: 2),
-                    Text('Has comprado ${_counterCocina.toString()} mesas de cocina y hay ${_stockCocina.toString()} mesas de cocina disponibles\n'),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Image.asset('assets/mesa-cocina-libro-nube-1_cerrada.jpg', width: 500, height: 400),
+                      const SizedBox(height: 2),
+                      Text('Has comprado ${_counterCocina.toString()} mesas de cocina y hay ${_stockCocina.toString()} mesas de cocina disponibles\n'),
 
-                    ElevatedButton(
-                      onPressed: () {
-                        _createCocina();
-                      },
-                      child: Text('Crear mesa de cocina'),
-                    ),
-                    Text('\n'),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_sell(_costeCocina) == 1 && _stockCocina > 0) {
-                          _incrementCounterCocina();
-                        }
-                      },
-                      child: Text('Comprar mesa de cocina (${_costeCocina.toString()}€)'),
-                    ),
-                    Text('\n'),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.asset('assets/mesaOficina.jpg', width: 500, height: 400),
-                    const SizedBox(height: 2),
-                    Text('Has comprado ${_counterOficina.toString()} mesas de oficina y hay ${_stockOficina.toString()} mesas de oficina disponibles'),
-                    ElevatedButton(
-                      onPressed: () {
-                        _createOficina();
-                      },
-                      child: Text('Crear mesa de oficina'),
-                    ),
-                    Text('\n'),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_sell((_costeOficina)) == 1 && _stockOficina > 0) {
-                          _incrementCounterOficina();
-                        }
-                      },
-                      child: Text('Comprar mesa de oficina (${_costeOficina.toString()}€)'),
-                    ),
-                    Text('\n'),
-                  ],
-                ),
-              ],
-            ),
-            Text('\nDispones de ${_saldo.toString()} €'),
-            ElevatedButton(
-              onPressed: () {
-                _reset();
-              },
-              child: Text('Reset'),
-            ),
-          ],
+                      ElevatedButton(
+                        onPressed: () {
+                          _createCocina();
+                        },
+                        child: Text('Crear mesa de cocina'),
+                      ),
+                      Text('\n'),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_sell(_costeCocina) == 1 && _stockCocina > 0) {
+                            _incrementCounterCocina();
+                          }
+                        },
+                        child: Text('Comprar mesa de cocina (${_costeCocina.toString()}€)'),
+                      ),
+                      Text('\n'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Image.asset('assets/mesaOficina.jpg', width: 500, height: 400),
+                      const SizedBox(height: 2),
+                      Text('Has comprado ${_counterOficina.toString()} mesas de oficina y hay ${_stockOficina.toString()} mesas de oficina disponibles'),
+                      ElevatedButton(
+                        onPressed: () {
+                          _createOficina();
+                        },
+                        child: Text('Crear mesa de oficina'),
+                      ),
+                      Text('\n'),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_sell((_costeOficina)) == 1 && _stockOficina > 0) {
+                            _incrementCounterOficina();
+                          }
+                        },
+                        child: Text('Comprar mesa de oficina (${_costeOficina.toString()}€)'),
+                      ),
+                      Text('\n'),
+                    ],
+                  ),
+                ],
+              ),
+              Text('\nDispones de ${_saldo.toString()} €'),
+              ElevatedButton(
+                onPressed: () {
+                  _reset();
+                },
+                child: Text('Reset'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
 }
