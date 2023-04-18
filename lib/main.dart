@@ -118,7 +118,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Image.asset('assets/mesa-cocina-libro-nube-1_cerrada.jpg', width: 500, height: 400),
                     const SizedBox(height: 2),
-                    Text('Has comprado ${_counterCocina.toString()} mesas de cocina y hay ${_stockCocina.toString()} mesas de cocina disponibles'),
+                    Text('Has comprado ${_counterCocina.toString()} mesas de cocina y hay ${_stockCocina.toString()} mesas de cocina disponibles\n'),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        _createCocina();
+                      },
+                      child: Text('Crear mesa de cocina'),
+                    ),
+                    Text('\n'),
                     ElevatedButton(
                       onPressed: () {
                         if (_sell(_costeCocina) == 1 && _stockCocina > 0) {
@@ -127,13 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: Text('Comprar mesa de cocina (${_costeCocina.toString()}€)'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _createCocina();
-                      },
-                      child: Text('Crear mesa de cocina'),
-
-                    ),
+                    Text('\n'),
                   ],
                 ),
                 Column(
@@ -143,18 +145,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text('Has comprado ${_counterOficina.toString()} mesas de oficina y hay ${_stockOficina.toString()} mesas de oficina disponibles'),
                     ElevatedButton(
                       onPressed: () {
+                        _createOficina();
+                      },
+                      child: Text('Crear mesa de oficina'),
+                    ),
+                    Text('\n'),
+                    ElevatedButton(
+                      onPressed: () {
                         if (_sell((_costeOficina)) == 1 && _stockOficina > 0) {
                           _incrementCounterOficina();
                         }
                       },
                       child: Text('Comprar mesa de oficina (${_costeOficina.toString()}€)'),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _createOficina();
-                      },
-                      child: Text('Crear mesa de oficina'),
-                    ),
+                    Text('\n'),
                   ],
                 ),
               ],
