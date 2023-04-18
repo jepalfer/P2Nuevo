@@ -79,6 +79,47 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void _popUpStock(BuildContext contexto) {
+    showDialog(
+      context: contexto,
+      builder: (BuildContext contexto) {
+        return AlertDialog(
+          title: Text('¡No hay suficiente stock!'),
+          content: Text('El tipo de mesa que desea comprar no está disponible de momento'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _popUpCost(BuildContext contexto) {
+    showDialog(
+      context: contexto,
+      builder: (BuildContext contexto) {
+        return AlertDialog(
+          title: Text('¡No hay suficiente dinero!'),
+          content: Text(
+              'No dispones del dinero suficiente para comprar la mesa que quieres'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _createOficina() {
     Mesa mesa = factoriaGeneral.crearMesa(_idMuebleOficina);
     _idMuebleOficina ++;
@@ -94,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _stockCocina ++;
     });
   }
+
 
   void _reset() {
     setState(() {
@@ -136,7 +178,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text('\n'),
                       ElevatedButton(
                         onPressed: () {
-                          if (_sell(_costeCocina) == 1 && _stockCocina > 0) {
+                          if (_stockCocina == 0) {
+                            _popUpStock(context);
+                          }
+                          else if (_sell(_costeCocina) == 0) {
+                            _popUpCost(context);
+                          }
+                          else {
                             _incrementCounterCocina();
                           }
                         },
@@ -159,7 +207,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text('\n'),
                       ElevatedButton(
                         onPressed: () {
-                          if (_sell((_costeOficina)) == 1 && _stockOficina > 0) {
+                          if (_stockOficina == 0) {
+                            _popUpStock(context);
+                          }
+                          else if (_sell(_costeOficina) == 0) {
+                            _popUpCost(context);
+                          }
+                          else {
                             _incrementCounterOficina();
                           }
                         },
